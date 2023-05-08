@@ -5,7 +5,7 @@ from data.dataStructure import PriorityQueue, PriorityQueueNode
 from data.intention import Observation
 
 from agent.intention.mainAgentIntention import MainAgentIntention
-from agent.intention.explorerIntentions import ExploreIntention, UpdateMapIntention
+from agent.intention.explorerIntentions import ExploreIntention, UpdateMapIntention, AttackIntention
 from agent.intention.commonIntentions import IdleIntention, EscapeIntention
 from agent.intention.blockProviderIntentions import BlockProvidingIntention, SingleBlockProvidingIntention
 from agent.intention.coordinatorIntentions import CoordinationIntention
@@ -172,10 +172,12 @@ class IntentionHandler():
         exploreInt = ExploreIntention()
         updateMapInt = UpdateMapIntention()
         idleInt = IdleIntention()
+        attkInt = AttackIntention()
 
         self.intentions.insert(PriorityQueueNode(exploreInt, exploreInt.getPriority()))
         self.intentions.insert(PriorityQueueNode(updateMapInt, updateMapInt.getPriority()))
         self.intentions.insert(PriorityQueueNode(idleInt, idleInt.getPriority()))
+        self.intentions.insert(PriorityQueueNode(attkInt, attkInt.getPriority()))
     
     def isAgentInMarkerCoords(self, observation: Observation) -> bool:
         """
