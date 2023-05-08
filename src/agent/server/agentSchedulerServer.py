@@ -52,7 +52,7 @@ class AgentSchedulerServer():
             sg.theme('DarkAmber')
             self.layout = None
             self.window = None
-    
+
     def populateAgents(self, capacity: int) -> None:
         """
         Adds the given amount of new `Agents` to
@@ -102,10 +102,10 @@ class AgentSchedulerServer():
 
         if self.explainAgentIntentions:
             self.initExplanation()
-    
+
         # Connect the rest of the team
         threads = [ThreadWithReturnValue(target = agent.connect, args=(self.host, self.port, self.password)) for agent in self.agents[1:]]
-        
+
         [t.start() for t in threads]
         [t.join() for t in threads]
 
@@ -118,7 +118,7 @@ class AgentSchedulerServer():
         for agent in self.agents[1:]:
             agent.registerToMapServer()
             self.simDataServer.registerInitialRoleForAgent(agent.id, agent.mapcRole)
-    
+
     async def scheduleAgents(self) -> None:
         """
         Schedules the `Agent` actions for the next step.\n
@@ -133,7 +133,7 @@ class AgentSchedulerServer():
         await self.planNextActionForAgents()
         self.executeActionForAgents()
         self.checkFinishedCurrentIntentionForAgents()
-        
+
     def generateOptionsForAgents(self) -> None:
         """
         Makes the `IntentionGenerator` and the `Agents` generate global
@@ -145,16 +145,16 @@ class AgentSchedulerServer():
 
         self.intentionGenerator.generateOptions(list(self.mapServer.maps.values()),
             self.getActiveAgents(), self.simDataServer.getTasks(), needReset)
-        
+
         self.initialization = False
-    
+
     def filterOptionsForAgents(self) -> None:
         """
         Makes the `IntentionGenerator` and the `Agents` filter the generated options.
         """
 
         self.intentionGenerator.filterOptions(list(self.mapServer.maps.values()), self.getActiveAgents())
-    
+
     async def planNextActionForAgents(self) -> None:
         """
         Makes the active `Agents` plan their next move by their
@@ -163,7 +163,7 @@ class AgentSchedulerServer():
 
         coroutines = [agent.planNextAction() for agent in self.getActiveAgents()]
         await asyncio.gather(*coroutines)
-    
+
     def executeActionForAgents(self) -> None:
         """
         Makes the active `Agents` execute their planned `AgentAction`
@@ -179,13 +179,13 @@ class AgentSchedulerServer():
         # Result process, store the changes
         for i in range(0, len(activeAgents)):
             activeAgents[i].processActionResult(results[i])
-        
+
         # Parse dynamic percept and set observation
         for i in range(0, len(activeAgents)):
             activeAgents[i].setDynamicPerceptAfterAction(results[i])
             self.intentionDataServer.addAgentObservation(activeAgents[i].id, activeAgents[i].observation)
             self.intentionDataServer.addAgentIntentionRole(activeAgents[i].id, activeAgents[i].intentionHandler.intentionRole)
-            
+
     def checkFinishedCurrentIntentionForAgents(self) -> None:
         """
         Makes the active `Agents` to check if their current `MainAgentIntention`
@@ -193,7 +193,7 @@ class AgentSchedulerServer():
         """
 
         self.intentionGenerator.checkFinishedCurrentIntentionForAgents(self.getActiveAgents())
-    
+
     def checkAgentIdentifications(self) -> None:
         """
         Checks the `Agent` identification globally:
@@ -222,8 +222,8 @@ class AgentSchedulerServer():
         Returns a new id for an `Agent`
         """
 
-        return "agent" + self.teamName + str(len(self.agents) + 1)
-    
+        return "a" + self.teamName + str(len(self.agents) + 1)
+
     # region Explanation
 
     def initExplanation(self) -> None:
