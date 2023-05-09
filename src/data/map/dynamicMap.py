@@ -478,6 +478,12 @@ class DynamicMap():
         return Coordinate.dimensionsCalculated and \
             len(self.store.keys()) == Coordinate.maxWidth * Coordinate.maxHeight
     
+    def getMaxWidth(self):
+        return Coordinate.maxWidth
+    
+    def getMaxHeight(self):
+        return Coordinate.maxHeight
+    
     def deleteGoalZones(self, goalZones: list[Coordinate]) -> None:
         """
         Removes the given goal zone `Coordinates` from the map.

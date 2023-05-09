@@ -14,5 +14,4 @@ class MainAgentIntention(AgentIntention):
         """
         Returns the priority of `MainAgentIntention`.
         """
-
         pass
