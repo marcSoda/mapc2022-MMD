@@ -11,7 +11,7 @@ from agent.pathfinder import PathFinder, PathFinderData
 
 from agent.action import AgentAction, ClearAction
 
-class AttackIntention(AgentIntention):
+class AttackIntention(MainAgentIntention):
     """
     Intention to search out an enemy agent to disable them.
     It is finished if it is able to disable one enemy agent.
@@ -19,9 +19,14 @@ class AttackIntention(AgentIntention):
     as the agent will go out of its way looking for agents to deactivate
     """
 
+    travelIntention: TravelIntention | None
+    targetCoordinate: Coordinate
+    finished : bool
+    relocation : bool
+
     def __init__(self) -> None:
         self.travelIntention  = None
-        self.targetCoordinate = None
+        self.targetCoordinate = Coordinate(0,0)
         self.finished = False
         self.relocation = False
 
@@ -109,7 +114,7 @@ class AttackIntention(AgentIntention):
         if self.travelIntention is not None:
             self.travelIntention.updateCoordinatesByOffset(offsetCoordinate)
 
-        self.targetCoordinate.updateByOffsetCoordinate(offsetCoordinate)
+        # self.targetCoordinate.updateByOffsetCoordinate(offsetCoordinate)
 
     def normalizeCoordinates(self) -> None:
         if self.travelIntention is not None:

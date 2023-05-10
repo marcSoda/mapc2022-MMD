@@ -222,7 +222,7 @@ class AgentSchedulerServer():
         Returns a new id for an `Agent`
         """
 
-        return "agent" + self.teamName + str(len(self.agents) + 1)
+        return "a" + self.teamName + str(len(self.agents) + 1)
     
     # region Explanation
 
