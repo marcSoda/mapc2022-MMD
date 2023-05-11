@@ -172,7 +172,7 @@ class IntentionHandler():
         exploreInt = ExploreIntention()
         updateMapInt = UpdateMapIntention()
         idleInt = IdleIntention()
-        attkInt = AttackIntention()
+        attkInt = AttackIntention() # Add attack intention
 
         self.intentions.insert(PriorityQueueNode(exploreInt, exploreInt.getPriority()))
         self.intentions.insert(PriorityQueueNode(updateMapInt, updateMapInt.getPriority()))
