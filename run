@@ -1,4 +1,4 @@
 #!/bin/bash
 
 source venv/bin/activate
-python ./src/main.py --host 128.180.123.95 --port 12300 --team KMM --pw 1
+python ./src/main.py --host 127.0.0.1 --port 12300 --team KMM --pw 1
