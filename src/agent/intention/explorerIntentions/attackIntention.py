@@ -100,7 +100,7 @@ class AttackIntention(AgentIntention):
                 key = lambda coord: Coordinate.manhattanDistance(coord,observation.agentCurrentCoordinate),
                 default = None)
         elif len(clearableCoords) == 1:
-            if random.randint(1,10) <= 7:
+            if random.randint(1,10) <= 5:
                 return min([coord for coord in clearableCoords],
                 key = lambda coord: Coordinate.manhattanDistance(coord,observation.agentCurrentCoordinate),
                 default = None)
